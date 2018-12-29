@@ -1,0 +1,4 @@
+hardwareshader postprocess scene {
+	name "eyepatch"
+	shader "yarr_shaders/eyepatch.fp" 330
+}

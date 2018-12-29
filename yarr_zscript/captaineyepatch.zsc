@@ -1,0 +1,49 @@
+Class CaptainEyepatch : DoomPlayer {
+	
+	PlayerInfo player;
+	
+	default { 
+		+DONTOVERLAP
+		MissileHeight 24;
+		//Player.CrouchSprite PLAY;  // can't get this to work, sorry!
+		Player.DamageScreenColor "Red";
+		Player.Attackzoffset 4;
+		Player.ColorRange 112,127;
+		Player.DisplayName "Captain (Eyepatch)";
+		Player.StartItem "Revolver";
+		Player.StartItem "Cutlass";
+		Player.StartItem "Bullets",50;
+		Player.WeaponSlot 1, "Cutlass";
+		Player.WeaponSlot 2, "Revolver", "DualPistol";
+		Player.WeaponSlot 3, "OldShotgun", "DoubleShotgun";
+		Player.WeaponSlot 4, "gatlingun";
+		Player.WeaponSlot 5, "Cannon";
+		Player.WeaponSlot 6, "Minicannon";
+		Player.WeaponSlot 7, "Dynamite", "DynamiteLauncher";
+	}
+	
+	states {
+	Death:
+		PLAY H 5;
+		PLAY I 5 A_PlayerScream();
+		PLAY J 5 A_NoBlocking();
+		PLAY KL 5;
+		PLAY M -1;
+		Stop;
+	XDeath:
+		POSS M 5;
+		POSS N 5 A_XScream();
+		POSS O 5 A_NoBlocking();
+		POSS PQRST 5;
+		POSS U -1;
+		Stop;
+	}
+	
+	override void PostBeginPlay() {
+		super.PostBeginPlay();
+		player = players[consoleplayer];
+		if (player) {
+			Shader.SetEnabled(player, "eyepatch", true);
+		}
+	}
+}
